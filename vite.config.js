@@ -6,11 +6,6 @@ export default defineConfig({
    components: {
     deep: true,
     directoryAsNamespace: true,
-    resolvers: [
-      (name) => {
-        console.log(name)
-      }
-    ]
    }
   },
   plugins: [
