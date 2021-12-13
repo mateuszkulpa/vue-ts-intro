@@ -35,11 +35,11 @@
   </div>
 </template>
 
-<script>
-import { computed } from 'vue'
+<script lang="ts">
+import { computed, defineComponent } from 'vue'
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue'
 
-export default {
+export default defineComponent({
   components: {
     TabGroup,
     TabList,
@@ -49,11 +49,13 @@ export default {
   },
   setup(_, { slots }) {
     const tabs = computed(() =>
-      slots
-        .default()
-        .map((slot) => ({ label: slot.props.label, content: slot }))
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (slots as any).default().map((slot: any) => ({
+        label: slot?.props?.label,
+        content: slot,
+      }))
     )
     return { tabs }
   },
-}
+})
 </script>

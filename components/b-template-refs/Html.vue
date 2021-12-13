@@ -3,12 +3,17 @@ import { defineComponent, onMounted, ref } from 'vue'
 
 export default defineComponent({
   setup() {
-    const elementRef = ref<HTMLElement | undefined>()
+    const elementRef = ref<HTMLElement>()
     const inputRef = ref<HTMLInputElement>()
 
     onMounted(() => {
-      //elementRef.value
-      //inputRef.value
+      if (elementRef.value) {
+        //elementRef.value.focus()
+      }
+
+      if (inputRef.value) {
+        //inputRef.value.value
+      }
     })
 
     return {

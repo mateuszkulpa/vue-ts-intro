@@ -10,7 +10,7 @@ export default defineComponent({
   },
   setup(props) {
     const query = ref('')
-    const results = ref([])
+    const results = ref<string[]>([])
 
     watch(query, async () => {
       results.value = await props.searchFunction(query.value)
