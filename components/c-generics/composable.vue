@@ -1,55 +1,46 @@
-<script lang="ts" setup>
-import { Ref, ref, watch } from 'vue'
+<script lang="ts">
+import usePagination from './usePagination'
+import { fetchGenres } from './api'
+import { defineComponent } from 'vue'
 
-function usePagination<T>(
-  fetchFn: (page: number, pageSize: number) => Promise<T[]>
-) {
-  const isLoading = ref(false)
-  const results = ref<T[]>([]) as Ref<T[]>
-  const currentPage = ref(1)
-  const pageSize = ref(10)
+export default defineComponent({
+  setup() {
+    const { results, currentPage } = usePagination(fetchGenres)
 
-  watch(
-    [currentPage, pageSize],
-    async () => {
-      try {
-        isLoading.value = true
-        results.value = await fetchFn(currentPage.value, pageSize.value)
-      } finally {
-        isLoading.value = false
-      }
-    },
-    { immediate: true }
-  )
-
-  return {
-    results,
-    currentPage,
-    pageSize,
-  }
-}
-
-type ListItem = {
-  id: string
-  label: string
-}
-
-async function fetchItems(page: number, pageSize: number): Promise<ListItem[]> {
-  return new Array(pageSize).fill(0).map((_, index) => ({
-    id: `${page}_${index}`,
-    label: `${index} item on ${page} page`,
-  }))
-}
-
-const { results, currentPage } = usePagination<ListItem>(fetchItems)
+    return {
+      results,
+      currentPage,
+    }
+  },
+})
 </script>
 
 <template>
-  <ul>
-    <li v-for="result in results" :key="result.id">
-      {{ result.id }}
-    </li>
-  </ul>
-  <button @click="currentPage = currentPage - 1">prev page</button>
-  <button @click="currentPage = currentPage + 2">next page</button>
+  <div>
+    <h3>Current page: {{ currentPage }}</h3>
+    <ul>
+      <li v-for="result in results" :key="result.id">
+        {{ result.name }}
+      </li>
+    </ul>
+    <div class="mt-4 space-x-4">
+      <button
+        class="btn"
+        :disabled="currentPage <= 1"
+        @click="currentPage = currentPage - 1"
+      >
+        prev page
+      </button>
+
+      <button class="btn" @click="currentPage = currentPage + 1">
+        next page
+      </button>
+    </div>
+  </div>
 </template>
+
+<style>
+.btn {
+  @apply px-4 py-3 text-white bg-purple-500 disabled:bg-gray-300 rounded-lg;
+}
+</style>

@@ -431,3 +431,39 @@ defineComponent({
 # Typing template refs - Vue component
 
 <BTemplateRefsComponent />
+
+--- 
+
+# Generics
+
+```ts {monaco}
+import axios from 'axios'
+type Question = { title: string; answers: { id: string; label: string } }
+
+axios.post<Question>('/api/diagnosis').then(({ data }) => {
+  console.log(data.title)
+})
+
+// generic type
+type Nullable<T> = T | null
+let nullableVariable: Nullable<boolean> = null
+nullableVariable = true
+
+// generic function
+function removeDuplicates<T>(arr: T[]): T[] {
+  return Array.from(new Set(arr))
+}
+const newArr = removeDuplicates([1, 2, 3, 4])
+
+// generic class
+class User<TId> {
+  constructor(readonly id: TId) {}
+}
+const user = new User<number>(1)
+```
+
+---
+
+# Generics - composables
+
+<CGenericsComposable />
