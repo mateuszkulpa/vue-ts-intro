@@ -19,9 +19,7 @@ export default defineComponent({
 
 <template>
   <div class="border-2 rounded-xl p-4 w-[50%] mb-4">
-    <div class="text-gray-600">
-      order status
-    </div>
+    <div class="text-gray-600">order status</div>
     <div
       class="text-3xl font-bold"
       :class="{ 'text-red-600': status === OrderStatus.Cancelled }"

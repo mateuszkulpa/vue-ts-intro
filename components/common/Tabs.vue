@@ -19,17 +19,14 @@
           >
             {{ tab.label }}
           </button>
-        </Tab> 
+        </Tab>
       </TabList>
 
       <TabPanels class="mt-2">
         <TabPanel
           v-for="(tab, index) in tabs"
           :key="index"
-          :class="[
-            'bg-white rounded-xl mt-4',
-            'focus:outline-none',
-          ]"
+          :class="['bg-white rounded-xl mt-4', 'focus:outline-none']"
         >
           <component :is="tab.content" />
         </TabPanel>
@@ -50,8 +47,12 @@ export default {
     TabPanels,
     TabPanel,
   },
-  setup(_, {slots}) {
-    const tabs = computed(() => slots.default().map((slot) => ({label: slot.props.label, content: slot })));
+  setup(_, { slots }) {
+    const tabs = computed(() =>
+      slots
+        .default()
+        .map((slot) => ({ label: slot.props.label, content: slot }))
+    )
     return { tabs }
   },
 }

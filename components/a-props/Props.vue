@@ -2,11 +2,7 @@
   <div>
     <Tabs>
       <TabsItem label="implicit">
-        <PropsImplicit
-          name="Cheese cake"
-          :price="12.34"
-          :available="true"
-        />
+        <PropsImplicit name="Cheese cake" :price="12.34" :available="true" />
       </TabsItem>
 
       <TabsItem label="Object">
@@ -70,8 +66,8 @@ export default defineComponent({
     PropsFunction,
     PropsEnum,
     PropsTypeGuard,
-    PropsUnion
-},
+    PropsUnion,
+  },
   setup() {
     const fetchItems = async (query: string) => {
       return await searchVehicles(query)

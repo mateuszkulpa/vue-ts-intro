@@ -20,7 +20,6 @@ export default defineComponent({
     },
   },
   setup(props) {
-    
     const title = <h5 class="font-semibold">{props.question.title}</h5>
     let body = <div>question fallback..</div>
 
@@ -41,18 +40,20 @@ export default defineComponent({
 
     if (isGroupSingleQuestion(props.question)) {
       console.log('group single', props.question)
-      body = 
+      body = (
         <div class="divide-y mt-4">
-          {props.question.groups.map(({label, answers}) => 
+          {props.question.groups.map(({ label, answers }) => (
             <div class="flex justify-between py-2">
               <span>{label}</span>
               <div class="flex space-x-2">
-                {answers.map(({label}) => <div>{label}</div>)}
+                {answers.map(({ label }) => (
+                  <div>{label}</div>
+                ))}
               </div>
             </div>
-          )}
+          ))}
         </div>
-      
+      )
     }
 
     return () => (

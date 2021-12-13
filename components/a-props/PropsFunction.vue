@@ -31,7 +31,7 @@ export default defineComponent({
       placeholder="Search car..."
       type="text"
       class="border-2 rounded-md py-2 px-4 w-full"
-    >
+    />
 
     <div
       v-if="results.length > 0"

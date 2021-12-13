@@ -414,7 +414,7 @@ defineComponent({
     },
   },
   setup(_, { emit }) {
-    emit('dateChanged', 'test') // ❌
+    emit('dateChanged', '2021-12-12') // ❌
     emit('dateChanged', new Date()) // ✅
   },
 })
@@ -422,5 +422,6 @@ defineComponent({
 
 ---
 
-# Typing template ref
+# Typing template refs - HTML elements
 
+<BTemplateRefsHtml />

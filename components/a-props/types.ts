@@ -18,14 +18,14 @@ export type Question = {
 }
 
 export type SingleQuestion = Question & {
-  discriminator: 'single',
+  discriminator: 'single'
   answers: { id: string; label: string }[]
 }
 
 export type GroupSingleQuestion = Question & {
-  discriminator: 'group-single',
+  discriminator: 'group-single'
   groups: {
-    label: string,
+    label: string
     answers: {
       id: string
       label: string

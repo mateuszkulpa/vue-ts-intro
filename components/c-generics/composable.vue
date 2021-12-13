@@ -46,17 +46,10 @@ const { results, currentPage } = usePagination<ListItem>(fetchItems)
 
 <template>
   <ul>
-    <li
-      v-for="result in results"
-      :key="result.id"
-    >
+    <li v-for="result in results" :key="result.id">
       {{ result.id }}
     </li>
   </ul>
-  <button @click="currentPage = currentPage - 1">
-    prev page
-  </button>
-  <button @click="currentPage = currentPage + 2">
-    next page
-  </button>
+  <button @click="currentPage = currentPage - 1">prev page</button>
+  <button @click="currentPage = currentPage + 2">next page</button>
 </template>
