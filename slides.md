@@ -21,7 +21,7 @@ drawings:
 
 - Typescript introduction
 - Vue with TS (Class components, Options API, Composition API)
-- Props types (Implicit, Object, Enum, Functions, Validators, Type guards)
+- Props types (Implicit, Object, Enum, Union,  Functions, Type guards)
 - Composition API (ref, reactive, computed, watch, provide/inject)
 - Emits types
 - Template ref types - HTML element / Vue components
@@ -243,3 +243,157 @@ export default defineComponent({
 # Typing props
 
 <APropsProps />
+
+---
+
+# Composition API - ref
+
+```ts {monaco}
+import { ref } from 'vue'
+
+const primitiveRef = ref('test')
+// const primitiveRef = ref<string>('test')
+primitiveRef.value = 4
+
+const undefinedRef = ref() // ❌
+undefinedRef.value.x = 5
+const undefinedOrNumberRef = ref<number | undefined>() // ✅
+undefinedOrNumberRef.value = 'fasf'
+undefinedOrNumberRef.value = 5
+
+const arrayRef = ref([]) // ❌
+const arrayExplicitRef = ref<number[]>([]) // ✅
+const arrayImplicitRef = ref([1, 2, 3]) // ✅
+arrayRef.value = [1, 2, 3]
+arrayExplicitRef.value = [1, 2, 3]
+arrayImplicitRef.value = [1]
+
+const objectImplicitRef = ref({ id: 1 }) // ✅
+const objectExplicitRef = ref<{ id: number }>({ id: 1 }) // ✅
+objectImplicitRef.value.id = 2
+objectExplicitRef.value = { id: 1 }
+```
+
+---
+
+# Composition API - reactive
+
+```ts {monaco}
+import { reactive } from 'vue'
+
+type Person = {
+  firstName: string
+  lastName: string
+  //dateBirth: Date
+}
+
+const reactivePerson = reactive({
+  firstName: 'Jan',
+  lastName: 'Kowalski',
+}) 
+
+const reactivePerson2 = reactive<Person>({
+  firstName: 'Jan',
+  lastName: 'Kowalski',
+})
+```
+
+---
+
+# Composition API - computed
+
+```ts {monaco}
+import { ref, computed } from 'vue'
+
+const dateFrom = ref(new Date('2021-12-01'))
+const dateTo = ref(new Date('2021-12-31'))
+
+const daysBetween = computed(
+  () => (dateFrom.value.getTime() - dateTo.value.getTime()) / (1000 * 3600 * 24) // + 'days'
+)
+
+const daysBetweenNumber = computed<number>(
+  () => (dateFrom.value.getTime() - dateTo.value.getTime()) / (1000 * 3600 * 24) // + 'days'
+)
+```
+
+---
+
+# Composition API - computed get/set
+
+```ts {monaco}
+import { defineComponent, computed } from 'vue'
+
+defineComponent({
+  props: {
+    modelValue: {
+      type: Boolean,
+      required: true,
+    },
+  },
+  setup(props, { emit }) {
+    const innerValue = computed<Boolean>({
+      get() {
+        return props.modelValue
+      },
+      set(newValue) {
+        emit('update:modelValue', newValue)
+      },
+    })
+    return {
+      innerValue,
+    }
+  },
+})
+```
+
+---
+
+# Composition API - watch
+
+```ts {monaco} 
+import { ref, watch, Ref } from 'vue'
+
+const query = ref<string>('')
+// const query = ref<number>(1)
+
+watch(query, (newValue) => {
+  console.log(newValue)
+})
+
+watch<string>(query, (newValue) => {
+  console.log(newValue)
+})
+
+// multiple sources
+const pageSize = ref(10)
+watch([query, pageSize], ([newQuery, newPageSize]) => {
+  console.log({ newQuery, newPageSize })
+})
+```
+
+---
+
+# Composition API - provide/inject
+
+```ts {monaco}
+import { ref, Ref, provide, inject, InjectionKey } from 'vue'
+
+const isMobile = ref(false)
+provide('isMobile', isMobile)
+
+// in other component..
+const injectedIsMobile = inject<Ref<boolean>>('isMobile') // undefined or boolean
+const injectedIsMobileWithDefault = inject<Ref<boolean>>('isMobile', ref(false)) // boolean
+
+// ----
+// with injection key ✅
+const darkModeInjectionKey: InjectionKey<boolean> = Symbol()
+const darkMode = false
+
+provide(darkModeInjectionKey, darkMode)
+// provide(darkModeInjectionKey, 'dark')
+
+// in other component..
+const injectedDarkMode = inject(darkModeInjectionKey, false) // type is get from injection key
+```
