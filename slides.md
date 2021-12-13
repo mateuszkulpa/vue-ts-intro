@@ -425,3 +425,9 @@ defineComponent({
 # Typing template refs - HTML elements
 
 <BTemplateRefsHtml />
+
+---
+
+# Typing template refs - Vue component
+
+<BTemplateRefsComponent />
