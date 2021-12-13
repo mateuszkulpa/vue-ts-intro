@@ -397,3 +397,30 @@ provide(darkModeInjectionKey, darkMode)
 // in other component..
 const injectedDarkMode = inject(darkModeInjectionKey, false) // type is get from injection key
 ```
+
+---
+
+# Typing emits
+
+```ts {monaco}
+import { defineComponent } from 'vue'
+
+defineComponent({
+  // emits: ['dateChanged'],
+  emits: {
+    dateChanged: (date: Date) => {
+      // ... check is value correct
+      return true
+    },
+  },
+  setup(_, { emit }) {
+    emit('dateChanged', 'test') // ❌
+    emit('dateChanged', new Date()) // ✅
+  },
+})
+```
+
+---
+
+# Typing template ref
+
