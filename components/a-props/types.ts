@@ -1,11 +1,15 @@
 export type Book = {
   title: string
+  author: string
   year: number
+  photoUrl: string
 }
 
-export enum LayoutType {
-  Default = 'default',
-  Sidebar = 'sidebar',
+export enum OrderStatus {
+  New = 'new',
+  Paid = 'paid',
+  Sent = 'paid',
+  Cancelled = 'cancelled',
 }
 
 export type Question = {
@@ -14,12 +18,14 @@ export type Question = {
 }
 
 export type SingleQuestion = Question & {
+  discriminator: 'single',
   answers: { id: string; label: string }[]
 }
 
 export type GroupSingleQuestion = Question & {
+  discriminator: 'group-single',
   groups: {
-    groupId: string
+    label: string,
     answers: {
       id: string
       label: string

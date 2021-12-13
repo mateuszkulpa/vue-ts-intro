@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import eslintPlugin from 'vite-plugin-eslint'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 
 export default defineConfig({
   slidev: {
@@ -10,5 +11,6 @@ export default defineConfig({
   },
   plugins: [
     eslintPlugin(),
+    vueJsx()
    ],
 })

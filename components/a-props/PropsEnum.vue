@@ -1,27 +1,32 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import { LayoutType } from './types'
+import { OrderStatus } from './types'
 
 export default defineComponent({
   props: {
-    layout: {
-      type: String as PropType<LayoutType>,
+    status: {
+      type: String as PropType<OrderStatus>,
       required: true,
     },
   },
   setup() {
     return {
-      LayoutType,
+      OrderStatus,
     }
   },
 })
 </script>
 
 <template>
-  <div v-if="layout === LayoutType.Default">
-    default layout
-  </div>
-  <div v-else-if="layout === LayoutType.Sidebar">
-    sidebar layout
+  <div class="border-2 rounded-xl p-4 w-[50%] mb-4">
+    <div class="text-gray-600">
+      order status
+    </div>
+    <div
+      class="text-3xl font-bold"
+      :class="{ 'text-red-600': status === OrderStatus.Cancelled }"
+    >
+      {{ status }}
+    </div>
   </div>
 </template>

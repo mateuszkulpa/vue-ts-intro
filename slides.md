@@ -20,9 +20,9 @@ drawings:
 # Agenda
 
 - Typescript introduction
-- Vue with TS (Options API, Composition API, Class components)
+- Vue with TS (Class components, Options API, Composition API)
+- Props types (Implicit, Object, Enum, Functions, Validators, Type guards)
 - Composition API (ref, reactive, computed, watch, provide/inject)
-- Props types (Enums, Validators, Callbacks, Type guards)
 - Emits types
 - Template ref types - HTML element / Vue components
 - Generics (composables, component factory)
@@ -56,7 +56,7 @@ function createOrder(order: Order) {
 </div>
 <div>
 
-```javascript
+```js
 function createOrder(order) {
   axios.post('/orders', order)
 }
@@ -69,7 +69,7 @@ function createOrder(order) {
 
 # Typescript
 
-```typescript {monaco}
+```ts {monaco}
 import axios from 'axios'
 
 type Order = {
@@ -96,7 +96,7 @@ createOrder({
 
 # Typescript
 
-```typescript {monaco}
+```ts {monaco}
 let numberValue = 4
 // let number: number = 4
 numberValue = '4'
@@ -158,7 +158,9 @@ export default class Greeting extends GreetingProps {
 
 ---
 
-# Vue.extend
+# Options API - Vue.extend
+
+Only for Vue 2
 
 ```typescript
 import Vue from 'vue'
@@ -184,3 +186,60 @@ const Component = Vue.extend({
 })
 ```
 
+---
+
+# Options API - defineComponent
+
+```ts {monaco}
+import { defineComponent } from 'vue' // Vue 3
+// import { defineComponent } from '@vue/composition-api' // Vue 2
+
+export default defineComponent({
+  props: {
+    date: {
+      type: Date,
+      required: true,
+    },
+  },
+  computed: {
+    formattedDate(): string {
+      return new Intl.DateTimeFormat('en-US').format(this.date)
+    },
+  },
+  created() {
+    // this
+  },
+})
+```
+
+---
+
+# Composition API
+
+```ts {monaco}
+import { defineComponent, computed } from 'vue' // Vue 3
+// import { defineComponent, computed } from '@vue/composition-api' // Vue 2
+
+export default defineComponent({
+  props: {
+    date: {
+      type: Date,
+      required: true,
+    },
+  },
+  setup(props) {
+    const formattedDate = computed(() =>
+      new Intl.DateTimeFormat('en-US').format(props.date)
+    )
+    return {
+      formattedDate,
+    }
+  },
+})
+```
+
+---
+
+# Typing props
+
+<APropsProps />
