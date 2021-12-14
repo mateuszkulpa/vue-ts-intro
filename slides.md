@@ -536,10 +536,3 @@ const debouncedFn = debounce(() => {
 
 window.addEventListener('resize', debouncedFn)
 ```
-
----
-
-# Testing components with Typescript
-
-- typed access to internals of components
-- improved maintaining of tests 

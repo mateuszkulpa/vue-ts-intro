@@ -4,13 +4,10 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 
 export default defineConfig({
   slidev: {
-   components: {
-    deep: true,
-    directoryAsNamespace: true,
-   }
+    components: {
+      deep: true,
+      directoryAsNamespace: true,
+    },
   },
-  plugins: [
-    eslintPlugin(),
-    vueJsx()
-   ],
+  plugins: [eslintPlugin(), vueJsx()],
 })
