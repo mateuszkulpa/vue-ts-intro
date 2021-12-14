@@ -25,7 +25,7 @@ drawings:
 - Composition API (ref, reactive, computed, watch, provide/inject)
 - Emits types
 - Template ref types - HTML element / Vue components
-- Generics (composables, component factory)
+- Generics (composables)
 - Declare Global properties vue
 - Declare types for third-party libraries
 - Testing with Typescript
@@ -116,10 +116,26 @@ function handleKeydown(event) {}
 // }
 ```
 
-
 ---
-layout: image-right
-image: https://source.unsplash.com/collection/94734566/1920x1080
+
+# How to start?
+
+- VS Code + <a href="https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar">volar extension</a>
+- JetBrains WebStorm
+
+
+Vue CLI
+```bash
+npm install --global @vue/cli
+vue create my-project-name
+# pick typescript support
+```
+
+Vite
+```bash
+npm init vite@latest my-vue-app -- --template vue-ts
+```
+
 ---
 
 # Vue with TypeScript
@@ -467,3 +483,63 @@ const user = new User<number>(1)
 # Generics - composables
 
 <CGenericsComposable />
+
+---
+
+# Declare global vue properties
+
+```ts {monaco}
+import { createApp, defineComponent } from 'vue'
+
+const app = createApp({})
+app.config.globalProperties.$analytics = {
+  trackEvent: (eventName: string) => {
+    console.log(eventName)
+  },
+}
+app.mount('#app')
+
+// declare module 'vue' {
+//   interface ComponentCustomProperties {
+//     $analytics: { trackEvent: (eventName: string) => void }
+//   }
+// }
+
+const Component = defineComponent({
+  created() {
+    this.$analytics.trackEvent('question answered')
+  },
+})
+```
+
+---
+
+# Declare types for third-party libraries
+
+```ts
+declare module 'debounce' {
+  const debounce: (callback: () => void, timeout: number) => () => void
+  export default debounce
+}
+```
+
+```ts
+import debounce from "debounce"
+
+// npm i @types/debounce --save-dev
+// or
+// declare own types
+
+const debouncedFn = debounce(() => {
+    console.log('resized')
+}, 200)
+
+window.addEventListener('resize', debouncedFn)
+```
+
+---
+
+# Testing components with Typescript
+
+- typed access to internals of components
+- improved maintaining of tests 
