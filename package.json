@@ -14,7 +14,9 @@
     "@vue/composition-api": "^1.4.1",
     "axios": "^0.24.0",
     "faker": "^5.5.3",
-    "vue": "^3.2.24"
+    "pinia": "^2.0.6",
+    "vue": "^3.2.24",
+    "vuex": "^4.0.2"
   },
   "name": "vue-ts-intro",
   "devDependencies": {

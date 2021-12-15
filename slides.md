@@ -28,10 +28,8 @@ drawings:
 - Generics (composables)
 - Declare Global properties vue
 - Declare types for third-party libraries
-- Testing with Typescript
 - Types state with Vuex/Pinia
 - Refactor apps with Typescript
-
 
 
 ---
@@ -536,3 +534,8 @@ const debouncedFn = debounce(() => {
 
 window.addEventListener('resize', debouncedFn)
 ```
+
+# State typing
+
+- Pinia
+- Vuex
