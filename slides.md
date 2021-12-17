@@ -11,6 +11,9 @@ info: |
 # persist drawings in exports and build
 drawings:
   persist: false
+defaults:
+  layout: default
+layout: cover
 ---
 # Introduction to Vue + TS
 
