@@ -538,6 +538,8 @@ const debouncedFn = debounce(() => {
 window.addEventListener('resize', debouncedFn)
 ```
 
+---
+
 # State typing
 
 - Pinia
