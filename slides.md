@@ -31,8 +31,8 @@ layout: cover
 - Generics (composables)
 - Declare Global properties vue
 - Declare types for third-party libraries
-- Types state with Vuex/Pinia
-- Refactor apps with Typescript
+- Typed state with Vuex/Pinia
+- Generate API client
 
 
 ---
@@ -544,3 +544,11 @@ window.addEventListener('resize', debouncedFn)
 
 - Pinia
 - Vuex
+
+---
+
+# API client for TypeScript
+
+https://editor.swagger.io/
+
+<img class="h-96 rounded-md shadow-lg" src="/assets/swagger.png" alt="Swagger code generator"/>
