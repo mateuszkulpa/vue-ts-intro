@@ -552,3 +552,13 @@ window.addEventListener('resize', debouncedFn)
 https://editor.swagger.io/
 
 <img class="h-96 rounded-md shadow-lg" src="/assets/swagger.png" alt="Swagger code generator"/>
+
+
+---
+layout: cover
+class: text-center
+---
+
+# Thank you
+
+## Any questions?
