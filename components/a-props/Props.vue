@@ -1,7 +1,7 @@
 <template>
   <div>
     <Tabs>
-      <TabsItem label="implicit">
+      <TabsItem label="Implicit">
         <PropsImplicit name="Cheese cake" :price="12.34" :available="true" />
       </TabsItem>
 

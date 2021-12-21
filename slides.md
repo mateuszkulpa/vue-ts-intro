@@ -349,7 +349,7 @@ defineComponent({
     },
   },
   setup(props, { emit }) {
-    const innerValue = computed<Boolean>({
+    const innerValue = computed<boolean>({
       get() {
         return props.modelValue
       },
